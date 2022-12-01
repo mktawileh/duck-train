@@ -1,0 +1,30 @@
+{
+    "tasks": [
+      
+        {
+            "type": "cppbuild",
+            "label": "C/C++: cpp build active file",
+            "command": "c:/MinGW/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${workspaceFolder}/Main.cpp",
+                "-lopengl32",
+                "-lglu32",
+                "-L\"${workspaceFolder}/lib\"",
+                "-lglut32",
+                // "-Idir",
+                // "${workspaceFolder}/src/*.cpp",
+                "-o",
+                "${workspaceFolder}/build/Main"
+            ],
+       
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: /c/MinGW/bin/cpp"
+        }
+    ],
+    "version": "2.0.0"
+}
