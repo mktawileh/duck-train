@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include "src/Model.h"
+
 using namespace std;
 
 Model test;
@@ -14,7 +15,7 @@ Model test;
 void initRendering()
 {
     glEnable(GL_DEPTH_TEST);
-    test.Load("modules/shape.obj");
+    test.Load("models/shape.obj");
     test.PrintFaces();
 }
 
