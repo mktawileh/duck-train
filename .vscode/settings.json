@@ -46,7 +46,9 @@
         "typeinfo": "cpp",
         "cstring": "cpp",
         "chrono": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
     },
     // "C_Cpp.clang_format_fallbackStyle": "LLVM"
 }
