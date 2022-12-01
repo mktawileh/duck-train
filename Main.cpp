@@ -1,5 +1,5 @@
 /*
-  Author: "Duck on the truck" Team
+  Author: "A duck on the truck" Team
 */
 #include "include/glut.h"
 #include <stdlib.h>
