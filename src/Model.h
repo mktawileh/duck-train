@@ -1,14 +1,5 @@
 #pragma once
 
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <array>
-
-#include "Primitives.h"
-#include "Utils.h"
-
 class Face
 {
 public:
@@ -92,13 +83,13 @@ private:
       {
         int v[3] = {0, 0, 0}, t[3] = {0, 0, 0}, n = 0;
         // Adding face without texture vertices.
-        if (Utils::HasDoubleSlash(line))
+        if (Model::HasDoubleSlash(line))
         {
           sscanf(line.c_str(), "f %d//%d %d//%d %d//%d", &v[0], &n, &v[1], &n, &v[2], &n);
           t[0] = t[1] = t[2] = -1;
         }
         // Adding face without normal vertices.
-        else if (Utils::CountChar(line, '/') == 3)
+        else if (Model::CountChar(line, '/') == 3)
         {
           sscanf(line.c_str(), "f %d/%d %d/%d %d/%d", &v[0], &t[0], &v[1], &t[1], &v[2], &t[2]);
           n = -1;
@@ -164,7 +155,7 @@ private:
       else if (line[0] == 'N' && line[1] == 's')
       {
         sscanf(line.c_str(), "Ns %f", &a);
-        m_materials[index].shininess = a;
+        m_materials[index].shininess = a/10;
       }
       // Capturing Abient
       else if (line[0] == 'K' && line[1] == 'a')
@@ -203,11 +194,11 @@ private:
       // Enabling Materials
       if (face.mat != -1)
       {
-        // glMaterialfv(GL_FRONT, GL_AMBIENT, (GLfloat *)&m_materials[face.mat].ambient);
-        // glMaterialfv(GL_FRONT, GL_DIFFUSE, (GLfloat *)&m_materials[face.mat].diffuse);
-        // glMaterialfv(GL_FRONT, GL_SPECULAR, (GLfloat *)&m_materials[face.mat].specular);
-        // glMaterialf(GL_FRONT, GL_SHININESS, m_materials[face.mat].shininess);
-        // glMaterialfv(GL_FRONT, GL_EMISSION, (GLfloat *)&m_materials[face.mat].emissive);
+        glMaterialfv(GL_FRONT, GL_AMBIENT, (GLfloat *)&m_materials[face.mat].ambient);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, (GLfloat *)&m_materials[face.mat].diffuse);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, (GLfloat *)&m_materials[face.mat].specular);
+        glMaterialfv(GL_FRONT, GL_EMISSION, (GLfloat *)&m_materials[face.mat].emissive);
+        glMaterialf(GL_FRONT, GL_SHININESS, m_materials[face.mat].shininess);
       }
       // Draw vertices, texcoords and normal vector
       else if (face.normal != -1 && face.texcoords[0] != -1)
@@ -261,7 +252,7 @@ private:
 public:
   void Load(const char *filename)
   {
-    std::string path = Utils::getFilePath(filename);
+    std::string path = Model::getFilePath(filename);
     m_LoadFaces(filename);
     std::string mtlFileFullPath = path + "/" + mtlfile;
     m_LoadMaterials(mtlFileFullPath.c_str());
@@ -276,5 +267,33 @@ public:
   void PrintMat()
   {
     std::cout << "num of mats: " << m_materials.size() << std::endl;
+  }
+
+  static int CountChar(std::string &str, char ch)
+  {
+    int res = 0;
+    for (const char &c : str)
+      res += c == ch;
+    return res;
+  }
+  static bool HasDoubleSlash(std::string &str)
+  {
+    char prev = '_';
+    for (const char &c : str)
+    {
+      if (c == '/' && prev == '/')
+        return true;
+      prev = c;
+    }
+    return false;
+  }
+
+  static std::string getFilePath(const char* filename) {
+    std::string path = "";
+    std::string file = filename;
+    int n = file.find_last_of('/');
+    if (n > 0)
+      path = file.substr(0, n);
+    return path;
   }
 };
