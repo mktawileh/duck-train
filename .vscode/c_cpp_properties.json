@@ -3,12 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/include/**"
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/**"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "_DEBUG"
             ],
             "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
             "cStandard": "gnu17",

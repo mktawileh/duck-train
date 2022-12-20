@@ -8,17 +8,18 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/Main.cpp",
+                "${workspaceFolder}\\Main.cpp",
+                "${workspaceFolder}\\src\\*.cpp",
                 "-lopengl32",
                 "-lglu32",
-                "-L\"${workspaceFolder}/lib\"",
+                "-L\"${workspaceFolder}\\lib\"",
                 "-lglut32",
-                // "-Idir",
-                // "${workspaceFolder}/src/*.cpp",
                 "-I",
-                "${workspaceFolder}/include/",
+                "${workspaceFolder}\\include\\",
+                "-I",
+                "${workspaceFolder}\\",
                 "-o",
-                "${workspaceFolder}/build/Main"
+                "${workspaceFolder}\\build\\Main"
             ],
        
             "problemMatcher": [

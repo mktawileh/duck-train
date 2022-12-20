@@ -22,4 +22,13 @@ namespace Utils
     }
     return false;
   }
+
+  std::string getFilePath(const char* filename) {
+    std::string path = "";
+    std::string file = filename;
+    int n = file.find_last_of('/');
+    if (n > 0)
+      path = file.substr(0, n);
+    return path;
+  }
 };
