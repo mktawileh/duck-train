@@ -8,9 +8,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}\\Main.cpp",
-                "${workspaceFolder}\\Game.cpp",
-                // "${workspaceFolder}\\EntryPoint.cpp",
+                "${workspaceFolder}\\*.cpp",
                 "-lopengl32",
                 "-lglu32",
                 "-L\"${workspaceFolder}\\lib\"",

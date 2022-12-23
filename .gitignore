@@ -2,3 +2,5 @@
 /.vscode
 EntryPoint.cpp
 test.cpp
+.vscode/tasks.json
+

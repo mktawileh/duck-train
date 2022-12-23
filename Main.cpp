@@ -1,21 +1,23 @@
-#include "Main.h"
-#include "Game.h"
+#include "Renderer.h"
 
 int main(int argc, char **argv)
 {
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     glutCreateWindow("Holy Moly it work!");
 
-    // Game::InitMembers();
-    if (!Game::InitRendering())
+    if (!Renderer::Init())
     {
         return 0;
     }
 
-    glutDisplayFunc(Game::Display);
+    glutFullScreen();
+
+    // Main loop
+    glutDisplayFunc(Renderer::Render);
+
+    // Events
     glutReshapeFunc(Game::ResizeWindow);
     glutKeyboardFunc(Game::Keypressed);
     glutMotionFunc(Game::MouseDrag);
