@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    glutFullScreen();
+    // glutFullScreen();
 
     // Main loop
     glutDisplayFunc(Renderer::Render);
@@ -21,7 +21,9 @@ int main(int argc, char **argv)
     glutReshapeFunc(Game::ResizeWindow);
     glutKeyboardFunc(Game::Keypressed);
     glutMotionFunc(Game::MouseDrag);
-    glutMouseFunc(Game::MouseClick);
+    glutMouseFunc(Game::Mouse);
+    glutMouseWheelFunc(Game::MouseScroll);
+   
 
     glutMainLoop();
 

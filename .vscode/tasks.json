@@ -12,7 +12,7 @@
                 "-lopengl32",
                 "-lglu32",
                 "-L\"${workspaceFolder}\\lib\"",
-                "-lglut32",
+                "-lfreeglut",
                 "-I",
                 "${workspaceFolder}\\include\\",
                 "-I",

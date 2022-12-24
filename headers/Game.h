@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include <array>
-#include "glut.h"
+#include "GL/freeglut.h"
 #include "utils/Helper.h"
 #include "utils/MathAux.h"
 #include "utils/Primitives.h"
@@ -43,7 +43,9 @@ namespace Game
 
     // extern void Display();
 
-    extern void MouseClick(int button, int state, int x, int y);
+    extern void Mouse(int button, int state, int x, int y);
+
+    extern void MouseScroll(int button, int state, int x, int y);
 
     extern void MouseDrag(int x, int y);
 

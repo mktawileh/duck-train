@@ -18,6 +18,10 @@ public:
         list = glGenLists(1);
         glNewList(list, GL_COMPILE);
 
+        glDisable(GL_LIGHTING);
+        glEnable(GL_TEXTURE_2D);
+        glColor3d(1, 1, 1);
+
         glBindTexture(GL_TEXTURE_2D, front);
         glBegin(GL_QUADS);
         glTexCoord2d(0, 0);
@@ -89,13 +93,17 @@ public:
         glTexCoord2d(0, 1);
         glVertex3d(-width / 2, -height / 2, -depth / 2);
         glEnd();
+
+        glDisable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+
         glEndList();
     }
 
     void Draw()
     {
         glPushMatrix();
-        glTranslatef(0, 14.0f, 0);
+        glTranslatef(0, 12.0f, 0);
         glCallList(list);
         glPopMatrix();
     }

@@ -220,7 +220,7 @@ namespace Renderer
 
 	bool Init()
 	{
-		// glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT1);
 		glEnable(GL_LIGHT2);
 
@@ -228,6 +228,7 @@ namespace Renderer
 		glClearDepth(1.0f);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_NORMALIZE);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		// Calculate & save matrices
 
@@ -235,7 +236,7 @@ namespace Renderer
 		glViewport(0, 0, Game::windowWidth, Game::windowHeight);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(60.0f, (float)Game::windowWidth / Game::windowHeight, 1.0f, 600.0f);
+		gluPerspective(45.0f, (float)Game::windowWidth / Game::windowHeight, 1.0f, 600.0f);
 
 		// Model-view Matrix
 		glMatrixMode(GL_MODELVIEW);
@@ -247,7 +248,6 @@ namespace Renderer
 		glGetFloatv(GL_MODELVIEW_MATRIX, Game::cameraViewMatrix);
 		glPopMatrix();
 
-		glEnable(GL_TEXTURE_2D);
 
 		Game::InitObjects();
 
@@ -263,31 +263,30 @@ namespace Renderer
 		glLoadMatrixf(Game::cameraViewMatrix);
 
 		glLightfv(GL_LIGHT1, GL_POSITION, Vec4<float>(Game::lightPosition));
-		// glLightfv(GL_LIGHT1, GL_AMBIENT, Vec3<float>(0.2));
+		glLightfv(GL_LIGHT1, GL_AMBIENT, Vec3<float>(0.2));
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, Vec3<float>(1));
 		glLightfv(GL_LIGHT1, GL_SPECULAR, Vec3<float>(0.8));
 
-		// GLfloat light1_ambient[] = { 1.0, 0.85, 0.09, 0.2 };
+		GLfloat light1_ambient[] = { 1.0, 0.85, 0.09, 0.2 };
 		GLfloat light1_diffuse[] = {1.0, 0.85, 0.09, 1.0};
 		GLfloat light1_specular[] = {1.0, 0.95, 0.39, 1.0};
 		GLfloat spot_direction[] = {0.0, -1.0, 0.0};
 
-		// glLightfv(GL_LIGHT2, GL_AMBIENT, light1_ambient);
+		glLightfv(GL_LIGHT2, GL_AMBIENT, light1_ambient);
 		glLightfv(GL_LIGHT2, GL_DIFFUSE, light1_diffuse);
 		glLightfv(GL_LIGHT2, GL_SPECULAR, light1_specular);
 		glLightfv(GL_LIGHT2, GL_POSITION, Game::lightPosition2);
-		glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.1);
-		glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.05);
-		glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.01);
+		// glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.1);
+		// glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.05);
+		// glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.01);
 
 		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 70.0f);
 		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spot_direction);
-		// glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 2.0);
+		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 2.0);
 
 		Game::RedrawScene();
 
 		glutSwapBuffers();
-		std::cout << glutGetWindow() << '\n';
 		glutPostRedisplay();
 	}
 };

@@ -8,8 +8,8 @@ namespace Game
     Helper helper;
 
     // Objects
-    Model lamp;
-    Trolley t1;
+    // Model lamp;
+    Trolley trolley;
 
     // Skybox
     Skybox world;
@@ -21,35 +21,43 @@ namespace Game
     // Camera & light positions
     Vec3<float> cameraPosition(0.0f, 0.0f, 0.0f);
     Vec3<float> lookingAt(0.0f, 0.0f, -1.0f);
-    
+
     Vec3<float> lightPosition(2.0f, 3.0f, -2.0f);
     Vec4<float> lightPosition2(0.0f, 6.0f, 0.0f, 1.0f);
 
     void InitObjects()
     {
-        t1.Init();
-        lamp.Load("models/lamp.obj");
+        trolley.Init();
+        // lamp.Load("models/lamp.obj");
         world.Init();
     }
 
     void RedrawScene()
     {
-        helper.LoadModelViewMatrix();
         world.Draw();
-        // glPushMatrix();
-        // glScalef(0.03, 0.03, 0.03);
-        // glPushMatrix();
-        // helper.LoadModelViewMatrix();
-        // t1.Draw();
-        // glPopMatrix();
-        // // glTranslated(0, -100, 0);
-        // // glutSolidCube(100);
-        // glPopMatrix();
+
+        helper.LoadModelViewMatrix();
+        glPushMatrix();
+        glScalef(0.1, 0.1, 0.1);
+        trolley.Draw();
+        glPopMatrix();
     }
 
-    void MouseClick(int button, int state, int x, int y)
+    void Mouse(int button, int state, int x, int y)
     {
         helper.UpdateMouseClick(button, state, x, y);
+        
+    }
+
+    void MouseScroll(int button, int dir, int x, int y)
+    {
+        if (dir > 0)
+            helper.UpdateMouseScrollUp();
+        else
+
+            helper.UpdateMouseScrollDown();
+
+        return;
     }
 
     void MouseDrag(int x, int y)
