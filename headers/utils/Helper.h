@@ -9,7 +9,6 @@ class Helper
     float xrot = 0, yrot = 0, zrot = 0;
     float acc = 0.3f;
     float zoom_sense = 1.0f;
-
     float posx = 1, posy = 1, zoom = 0;
 
 public:
@@ -74,6 +73,15 @@ public:
         glTranslatef(0, 0, zoom);
         glRotatef(xrot, 1, 0, 0);
         glRotatef(yrot, 0, 1, 0);
+    }
+
+    void LoadRotateMatrix() {
+        glRotatef(xrot, 1, 0, 0);
+        glRotatef(yrot, 0, 1, 0);
+    }
+
+    void LoadTranslateMatrix() {
+        glTranslatef(0, 0, zoom);
     }
 
 

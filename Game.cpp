@@ -28,16 +28,18 @@ namespace Game
     void InitObjects()
     {
         trolley.Init();
-        // lamp.Load("models/lamp.obj");
         world.Init();
     }
 
     void RedrawScene()
     {
-        world.Draw();
-
-        helper.LoadModelViewMatrix();
         glPushMatrix();
+        helper.LoadRotateMatrix();
+        world.Draw();
+        glPopMatrix();
+        
+        glPushMatrix();
+        helper.LoadModelViewMatrix();
         glScalef(0.1, 0.1, 0.1);
         trolley.Draw();
         glPopMatrix();

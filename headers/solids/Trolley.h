@@ -3,17 +3,18 @@
 class Trolley : Drawable
 {
 
+    int wood;
+
     GLuint list;
 
 public:
     void Init()
     {
+        wood = LoadTexture((char*)"wood.bmp");
         list = glGenLists(1);
         glNewList(list, GL_COMPILE);
 
-        // glDisable(GL_LIGHTING);
-
-        // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glDisable(GL_LIGHTING);
 
         // Ceiling right up
         glNormal3d(0, 1, 0);
@@ -25,13 +26,22 @@ public:
         glEnd();
 
         // Celing right down
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0, 0);
         glVertex3d(40, 12.499, -15);
+        glTexCoord2d(0, 1);
         glVertex3d(40, 12.499, -10);
+        glTexCoord2d(1, 1);
         glVertex3d(-40, 12.499, -10);
+        glTexCoord2d(1, 0);
         glVertex3d(-40, 12.499, -15);
         glEnd();
+
+        glDisable(GL_TEXTURE_2D);
 
         // Ceiling left up
         glNormal3d(0, 1, 0);
@@ -41,7 +51,7 @@ public:
         glVertex3d(-40, 12.5, 10);
         glVertex3d(-40, 12.5, 15);
         glEnd();
-        // Ceiling left down
+        // Ceiling left down 
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
         glVertex3d(-40, 12.499, 15);
@@ -652,7 +662,7 @@ public:
         }
         glEnd();
 
-        // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glEnable(GL_LIGHTING);
 
         glEndList();
     }
