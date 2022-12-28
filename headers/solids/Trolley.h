@@ -4,38 +4,47 @@ class Trolley : Drawable
 {
 
     int wood;
-
+     int ground, inner_down_sides, inner_up_sides, package_room,ceiling;
+   
     GLuint list;
 
 public:
     void Init()
     {
-        wood = LoadTexture((char*)"wood.bmp");
+        wood = LoadTexture((char*)"Trolley_Texture/wood.bmp");
+        inner_down_sides = LoadTexture((char *)"Trolley_Texture/inner down sides.bmp");
+        inner_up_sides = LoadTexture((char *)"Trolley_Texture/inner side up.bmp");
+        package_room = LoadTexture((char *)"Trolley_Texture/package room.bmp");
+        ceiling= LoadTexture((char *)"Trolley_Texture/ceil.bmp");
         list = glGenLists(1);
         glNewList(list, GL_COMPILE);
 
         glDisable(GL_LIGHTING);
+        // glEnable(GL_TEXTURE_2D);
 
+        // glBindTexture(GL_TEXTURE_2D, wood);
+       
         // Ceiling right up
         glNormal3d(0, 1, 0);
         glBegin(GL_POLYGON);
-        glVertex3d(-40, 12.5, -15);
-        glVertex3d(-40, 12.5, -10);
-        glVertex3d(40, 12.5, -10);
+        glVertex3d(-40, 12.5, -15); 
+        glVertex3d(-40, 12.5, -10); 
+        glVertex3d(40, 12.5, -10); 
         glVertex3d(40, 12.5, -15);
         glEnd();
 
+       
         // Celing right down
         glEnable(GL_TEXTURE_2D);
 
-        glBindTexture(GL_TEXTURE_2D, wood);
+        glBindTexture(GL_TEXTURE_2D, ceiling);
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
         glTexCoord2d(0, 0);
         glVertex3d(40, 12.499, -15);
-        glTexCoord2d(0, 1);
+        glTexCoord2d(0, 25);
         glVertex3d(40, 12.499, -10);
-        glTexCoord2d(1, 1);
+        glTexCoord2d(1, 25);
         glVertex3d(-40, 12.499, -10);
         glTexCoord2d(1, 0);
         glVertex3d(-40, 12.499, -15);
@@ -52,13 +61,22 @@ public:
         glVertex3d(-40, 12.5, 15);
         glEnd();
         // Ceiling left down 
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 12.499, 15);
+        glTexCoord2d(0,25);
         glVertex3d(-40, 12.499, 10);
+        glTexCoord2d(1,25);
         glVertex3d(40, 12.499, 10);
+        glTexCoord2d(1,0);
         glVertex3d(40, 12.499, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Ceiling side left out
         glNormal3d(0, 1, 0);
@@ -70,13 +88,22 @@ public:
         glEnd();
 
         // Ceiling side left in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 12.5, 9.999);
+        glTexCoord2d(0,25);
         glVertex3d(-40, 15, 9.999);
+        glTexCoord2d(1,25);
         glVertex3d(40, 15, 9.999);
+        glTexCoord2d(1,0);
         glVertex3d(40, 12.5, 9.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Ceiling side right out
         glNormal3d(0, 0, -1);
@@ -88,13 +115,22 @@ public:
         glEnd();
 
         // Ceiling side right in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, 12.5, -9.999);
+        glTexCoord2d(0,25);
         glVertex3d(40, 15, -9.999);
+        glTexCoord2d(1,25);
         glVertex3d(-40, 15, -9.999);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 12.5, -9.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Celing center out
         glNormal3d(0, 1, 0);
@@ -106,161 +142,311 @@ public:
         glEnd();
 
         // Celing center in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 14.999, 10);
+        glTexCoord2d(0,100);
         glVertex3d(-40, 14.999, -10);
+        glTexCoord2d(100,1);
         glVertex3d(40, 14.999, -10);
+        glTexCoord2d(100,0);
         glVertex3d(40, 14.999, 10);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front side door left out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -12.5, 15);
+        glTexCoord2d(0,1);     
         glVertex3d(-40, 7.5, 15);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 7.5, 5);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -12.5, 5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front side door left in
-        glNormal3d(1, 0, 0);
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
+         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-39.999, -12.5, 5);
+        glTexCoord2d(0,1);
         glVertex3d(-39.999, 7.5, 5);
+        glTexCoord2d(1,1);
         glVertex3d(-39.999, 7.5, 15);
+        glTexCoord2d(1,0);
         glVertex3d(-39.999, -12.5, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front side door right out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -12.5, -5);
+        glTexCoord2d(0,1);
         glVertex3d(-40, 7.5, -5);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 7.5, -15);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -12.5, -15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front side door right in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-39.999, -12.5, -15);
+        glTexCoord2d(0,1);
         glVertex3d(-39.999, 7.5, -15);
+        glTexCoord2d(1,1);
         glVertex3d(-39.999, 7.5, -5);
+        glTexCoord2d(1,0);
         glVertex3d(-39.999, -12.5, -5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front up door out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 7.5, 15);
+        glTexCoord2d(0,1);
         glVertex3d(-40, 12.5, 15);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 12.5, -15);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 7.5, -15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Front up door in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0); 
         glVertex3d(-39.999, 7.5, -15);
+        glTexCoord2d(0,1);
         glVertex3d(-39.999, 12.5, -15);
+        glTexCoord2d(1,1);
         glVertex3d(-39.999, 12.5, 15);
+        glTexCoord2d(1,0);
         glVertex3d(-39.999, 7.5, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Celing front side out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 15, 10);
+        glTexCoord2d(0,1);
         glVertex3d(-40, 15, -10);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 12.5, -10);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 12.5, 10);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Celing front side in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-39.999, 12.5, 10);
+        glTexCoord2d(0,1);
         glVertex3d(-39.999, 12.5, -10);
+        glTexCoord2d(1,1);
         glVertex3d(-39.999, 15, -10);
+        glTexCoord2d(1,0);
         glVertex3d(-39.999, 15, 10);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back door side left out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -12.5, 5);
+        glTexCoord2d(0,1);
         glVertex3d(40, 7.5, 5);
+        glTexCoord2d(1,1);
         glVertex3d(40, 7.5, 15);
+        glTexCoord2d(1,0);
         glVertex3d(40, -12.5, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back door side left in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(39.999, -12.5, 15);
+        glTexCoord2d(0,1);
         glVertex3d(39.999, 7.5, 15);
+        glTexCoord2d(1,1);
         glVertex3d(39.999, 7.5, 5);
+        glTexCoord2d(1,0);
         glVertex3d(39.999, -12.5, 5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back door side right out
+        glEnable(GL_TEXTURE_2D);
 
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -12.5, -15);
+        glTexCoord2d(0,1);
         glVertex3d(40, 7.5, -15);
+        glTexCoord2d(1,1);
         glVertex3d(40, 7.5, -5);
+        glTexCoord2d(1,0);
         glVertex3d(40, -12.5, -5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back door side right in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(39.999, -12.5, -5);
+        glTexCoord2d(0,1);
         glVertex3d(39.999, 7.5, -5);
+        glTexCoord2d(1,1);
         glVertex3d(39.999, 7.5, -15);
+        glTexCoord2d(1,0);
         glVertex3d(39.999, -12.5, -15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back up door out
+        glEnable(GL_TEXTURE_2D);
 
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, 7.5, -15);
+        glTexCoord2d(0,1);
         glVertex3d(40, 12.5, -15);
+        glTexCoord2d(1,1);
         glVertex3d(40, 12.5, 15);
+        glTexCoord2d(1,0);
         glVertex3d(40, 7.5, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Back up door in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(39.999, 7.5, 15);
+        glTexCoord2d(0,1);
         glVertex3d(39.999, 12.5, 15);
+        glTexCoord2d(1,1);
         glVertex3d(39.999, 12.5, -15);
+        glTexCoord2d(1,0);
         glVertex3d(39.999, 7.5, -15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Celing back side out
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, 12.5, 10);
+        glTexCoord2d(0,1);
         glVertex3d(40, 12.5, -10);
+        glTexCoord2d(1,1);
         glVertex3d(40, 15, -10);
+        glTexCoord2d(1,0);
         glVertex3d(40, 15, 10);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Celing back side in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(39.999, 15, 10);
+        glTexCoord2d(0,1);
         glVertex3d(39.999, 15, -10);
+        glTexCoord2d(1,1);
         glVertex3d(39.999, 12.5, -10);
+        glTexCoord2d(1,0);
         glVertex3d(39.999, 12.5, 10);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
-        // Right window side bottom out
+        // Right window side bottom out  
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
         glVertex3d(-40, -12.5, -15);
@@ -268,17 +454,27 @@ public:
         glVertex3d(40, -2.5, -15);
         glVertex3d(40, -12.5, -15);
         glEnd();
-
+       
         // Right window side bottom in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -12.5, -14.999);
+        glTexCoord2d(0,1);
         glVertex3d(40, -2.5, -14.999);
+        glTexCoord2d(1,1);
         glVertex3d(-40, -2.5, -14.999);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -12.5, -14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Right window side up out
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
         glVertex3d(-40, 7.5, -15);
@@ -286,15 +482,24 @@ public:
         glVertex3d(40, 12.5, -15);
         glVertex3d(40, 7.5, -15);
         glEnd();
-
+        
         // Right window side up in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, 7.5, -14.999);
+        glTexCoord2d(0,1);
         glVertex3d(40, 12.5, -14.999);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 12.5, -14.999);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 7.5, -14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Right window side back up
         glNormal3d(0, 0, -1);
@@ -306,13 +511,22 @@ public:
         glEnd();
 
         // Right window side back in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -2.5, -14.999);
+        glTexCoord2d(0,1);
         glVertex3d(40, 7.5, -14.999);
+        glTexCoord2d(1,1);
         glVertex3d(37.5, 7.5, -14.999);
+        glTexCoord2d(1,0);
         glVertex3d(37.5, -2.5, -14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Right window side front out
         glNormal3d(0, 0, -1);
@@ -323,13 +537,22 @@ public:
         glVertex3d(-40, -2.5, -15);
         glEnd();
         // Right window side font in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -2.5, -14.999);
+        glTexCoord2d(0,1);
         glVertex3d(-37.5, -2.5, -14.999);
+        glTexCoord2d(1,1);
         glVertex3d(-37.5, 7.5, -14.999);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 7.5, -14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Left window side bottom out
         glNormal3d(0, 0, 1);
@@ -340,30 +563,52 @@ public:
         glVertex3d(-40, -12.5, 15);
         glEnd();
         // Left window side bottom in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -12.5, 14.999);
+        glTexCoord2d(0,1);
         glVertex3d(-40, -2.5, 14.999);
+        glTexCoord2d(1,1);
         glVertex3d(40, -2.5, 14.999);
+        glTexCoord2d(1,0);
         glVertex3d(40, -12.5, 14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Left window side up out
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, 7.5, 15);
+        glTexCoord2d(0,1);
         glVertex3d(40, 12.5, 15);
+        glTexCoord2d(1,1);
         glVertex3d(-40, 12.5, 15);
+        glTexCoord2d(1,0);
         glVertex3d(-40, 7.5, 15);
         glEnd();
         // Left window side up in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 7.5, 14.999);
+        glTexCoord2d(0,1);
         glVertex3d(-40, 12.5, 14.999);
+        glTexCoord2d(1,1);
         glVertex3d(40, 12.5, 14.999);
+        glTexCoord2d(1,0);
         glVertex3d(40, 7.5, 14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Left window side back out
         glNormal3d(0, 0, 1);
@@ -374,13 +619,22 @@ public:
         glVertex3d(37.5, -2.5, 15);
         glEnd();
         // Left widnow side back in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(37.5, -2.5, 14.999);
+        glTexCoord2d(0,1);
         glVertex3d(37.5, 7.5, 14.999);
+        glTexCoord2d(1,1);
         glVertex3d(40, 7.5, 14.999);
+        glTexCoord2d(1,0);
         glVertex3d(40, -2.5, 14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Left window side front out
         glNormal3d(0, 0, 1);
@@ -392,31 +646,58 @@ public:
         glEnd();
 
         // Left window side front in
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, 7.5, 14.999);
+        glTexCoord2d(0,1);
         glVertex3d(-37.5, 7.5, 14.999);
+        glTexCoord2d(1,1);
         glVertex3d(-37.5, -2.5, 14.999);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -2.5, 14.999);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Floor up
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -15, 15);
+        glTexCoord2d(0,1);
         glVertex3d(-40, -15, -15);
+        glTexCoord2d(1,1);
         glVertex3d(40, -15, -15);
+        glTexCoord2d(1,0);
         glVertex3d(40, -15, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Floor bottom
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -12.5, 15);
+        glTexCoord2d(0,1);
         glVertex3d(40, -12.5, -15);
+        glTexCoord2d(1,1);
         glVertex3d(-40, -12.5, -15);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -12.5, 15);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Floor right side
         glNormal3d(0, 0, -1);
@@ -436,109 +717,221 @@ public:
         glEnd();
 
         // Back step up
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(45, -12.5, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(45, -12.5, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(40, -12.5, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(40, -12.5, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
+
         // Back step down
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -15, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(40, -15, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(45, -15, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(45, -15, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step back front side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(45, -12.5, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(45, -15, 17.5);
+        glTexCoord2d(1,1);
         glVertex3d(45, -15, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(45, -12.5, -17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step back back side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -12.5, -17.5);
+        glTexCoord2d(0,1);
         glVertex3d(40, -15, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(40, -15, 17.5);
+        glTexCoord2d(1,0);
         glVertex3d(40, -12.5, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step back left side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(45, -15, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(45, -12.5, 17.5);
+        glTexCoord2d(1,1);
         glVertex3d(40, -12.5, 17.5);
+        glTexCoord2d(1,0);
         glVertex3d(40, -15, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step back right side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(40, -15, -17.5);
+        glTexCoord2d(0,1);
         glVertex3d(40, -12.5, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(45, -12.5, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(45, -15, -17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step front up
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -12.5, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-40, -12.5, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-45, -12.5, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-45, -12.5, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step front down
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, -1, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-45, -15, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-45, -15, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-40, -15, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -15, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step front front side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(-1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-45, -12.5, -17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-45, -15, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-45, -15, 17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-45, -12.5, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
+
         // Step front back side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(1, 0, 0);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -12.5, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-40, -15, 17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-40, -15, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -12.5, -17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
         // Step front right side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, 1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-40, -15, 17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-40, -12.5, 17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-45, -12.5, 17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-45, -15, 17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
+
         // Step front left side
+        glEnable(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, wood);
+        
         glNormal3d(0, 0, -1);
         glBegin(GL_POLYGON);
+        glTexCoord2d(0,0);
         glVertex3d(-45, -15, -17.5);
+        glTexCoord2d(0,1);
         glVertex3d(-45, -12.5, -17.5);
+        glTexCoord2d(1,1);
         glVertex3d(-40, -12.5, -17.5);
+        glTexCoord2d(1,0);
         glVertex3d(-40, -15, -17.5);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
+
 
         // Bottom box back
         glNormal3d(-1, 0, 0);
