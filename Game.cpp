@@ -11,6 +11,7 @@ namespace Game
     // Model lamp;
     Trolley trolley;
 
+
     // Skybox
     Skybox world;
 
@@ -25,30 +26,31 @@ namespace Game
     Vec3<float> lightPosition(2.0f, 3.0f, -2.0f);
     Vec4<float> lightPosition2(0.0f, 6.0f, 0.0f, 1.0f);
 
+
+
     void InitObjects()
     {
         trolley.Init();
+        // lamp.Load("models/lamp.obj");
+
+
+
         world.Init();
     }
 
     void RedrawScene()
     {
-        glPushMatrix();
-        helper.LoadRotateMatrix();
-        world.Draw();
-        glPopMatrix();
-        
-        glPushMatrix();
         helper.LoadModelViewMatrix();
+        glPushMatrix();
         glScalef(0.1, 0.1, 0.1);
         trolley.Draw();
+        world.Draw();
         glPopMatrix();
     }
 
     void Mouse(int button, int state, int x, int y)
     {
         helper.UpdateMouseClick(button, state, x, y);
-        
     }
 
     void MouseScroll(int button, int dir, int x, int y)
@@ -56,7 +58,6 @@ namespace Game
         if (dir > 0)
             helper.UpdateMouseScrollUp();
         else
-
             helper.UpdateMouseScrollDown();
 
         return;

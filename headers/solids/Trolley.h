@@ -1,5 +1,6 @@
 #pragma once
-
+#include "solids/Door.h"
+#include "solids/Window.h"
 class Trolley : Drawable
 {
 
@@ -7,10 +8,13 @@ class Trolley : Drawable
      int ground, inner_down_sides, inner_up_sides, package_room,ceiling;
    
     GLuint list;
+        Door doors;
+    Window windows;
 
 public:
     void Init()
     {
+        
         wood = LoadTexture((char*)"Trolley_Texture/wood.bmp");
         inner_down_sides = LoadTexture((char *)"Trolley_Texture/inner down sides.bmp");
         inner_up_sides = LoadTexture((char *)"Trolley_Texture/inner side up.bmp");
@@ -19,7 +23,11 @@ public:
         list = glGenLists(1);
         glNewList(list, GL_COMPILE);
 
-        glDisable(GL_LIGHTING);
+        // glDisable(GL_LIGHTING);
+                glTranslated(0,0,-100);
+
+                doors.Init();
+        windows.Init();
         // glEnable(GL_TEXTURE_2D);
 
         // glBindTexture(GL_TEXTURE_2D, wood);
@@ -1055,7 +1063,7 @@ public:
         }
         glEnd();
 
-        glEnable(GL_LIGHTING);
+        // glEnable(GL_LIGHTING);
 
         glEndList();
     }

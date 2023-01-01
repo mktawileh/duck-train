@@ -14,6 +14,8 @@
 #include "Model.h"
 #include "Skybox.h"
 #include "solids/Trolley.h"
+#include "solids/Door.h"
+#include "solids/Window.h"
 
 namespace Game
 {
